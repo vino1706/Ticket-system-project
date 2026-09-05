@@ -138,4 +138,5 @@ pipeline {
             sh 'cat frontend/frontend.log || true'
         }
     }
+ }
 }
