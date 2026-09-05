@@ -11,12 +11,6 @@ pipeline {
         SONARQUBE_CREDENTIALS = credentials('sonar_token')
     }
 
-    options {
-        timeout(time: 30, unit: 'MINUTES')
-        ansiColor('xterm') { ... }
-        disableConcurrentBuilds()
-    }
-
     stages {
         stage('Backend server Build') {
             steps {
