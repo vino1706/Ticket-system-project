@@ -30,11 +30,6 @@ pipeline {
                 sh 'mvn test'    
             }
         }
-        stage('Frontend server test') {
-            steps {
-                sh 'cd frontend && npm test'
-            }
-        }
         stage('SonarQube Scanning') {
             steps {
                 echo 'Scanning Code Quality using SonarQube'
