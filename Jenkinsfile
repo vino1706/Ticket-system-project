@@ -107,7 +107,7 @@ pipeline {
                 echo 'Spinning up containers for Monitoring Stacks'
                 dir('monitoring') {
                     sh '''
-                        cd frontend'
+                        cd frontend
                         docker compose up -d --build
                     '''
                 }
