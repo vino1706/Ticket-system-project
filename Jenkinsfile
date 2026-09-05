@@ -54,6 +54,7 @@ pipeline {
                  withCredentials([usernamePassword(credentialsId: 'sonar_token', usernameVariable: 'SONAR_USER', passwordVariable: 'SONAR_PAT')]) {
                 sh 'mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=jenkins -Dsonar.projectName='jenkins' -Dsonar.host.url=http://16.60.119.201:9000 -Dsonar.token="$SONAR_PAT"'
             }
+          }
         }
         stage('Docker Backend build') {
             steps {
@@ -138,5 +139,4 @@ pipeline {
             sh 'cat frontend/frontend.log || true'
         }
     }
- }
 }
