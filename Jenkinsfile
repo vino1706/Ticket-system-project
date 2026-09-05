@@ -21,8 +21,7 @@ pipeline {
         stage('Frontend server Build') {
             steps {
                 echo 'Starting Frontend application in the background...'
-                sh ' npm install'
-                sh 'npm run dev'
+                sh 'cd frontend && npm install && npm run dev '
 
             }
         }
