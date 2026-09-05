@@ -37,7 +37,6 @@ pipeline {
                     junit '**/target/surefire-reports/*.xml'
                 }
             }
-        }
         stage('Frontend server test') {
             steps {
                 sh 'npm test'
@@ -119,7 +118,6 @@ pipeline {
             }
         }
     }
-
     post {
         success {
             echo '============================================================='
