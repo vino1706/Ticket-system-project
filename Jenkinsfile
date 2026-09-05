@@ -56,6 +56,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PAT')]) {
                     sh '''
                         echo "$DOCKER_PAT" | docker login -u "$DOCKER_USER" --password-stdin
+                        docker tag backendbookingapp:v1 "$DOCKER_USER/backendbookingapp:v1"
                         docker push "$DOCKER_USER"/backendbookingapp:v1
                     '''
                 }
@@ -67,6 +68,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PAT')]) {
                     sh '''
                         echo "$DOCKER_PAT" | docker login -u "$DOCKER_USER" --password-stdin
+                         docker tag frontendbookingapp:v1 "$DOCKER_USER/frontendbookingapp:v1"
                         docker push "$DOCKER_USER"/frontendbookingapp:v1
                     '''
                 }
