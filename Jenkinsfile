@@ -26,11 +26,10 @@ pipeline {
             }
         }
         stage('Backend server Test') {
-            steps {
-                dir('backend') {
+            steps { 
                 sh 'mvn test'
-                junit '**/target/surefire-reports/*.xml'
-                }     
+                junit '**/target/surefire-reports/*.xml    
+            }
         }
             post {
                 always {
