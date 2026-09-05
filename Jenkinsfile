@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Frontend server test') {
             steps {
-                sh 'npm test'
+                sh 'cd frontend && npm test'
             }
         }
         stage('SonarQube Scanning') {
