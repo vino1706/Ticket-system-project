@@ -29,7 +29,7 @@ pipeline {
             steps {
                 dir('backend') {
                 sh 'mvn test'
-                junit '**/target/surefire-reports/*.xml
+                junit '**/target/surefire-reports/*.xml'
                 }     
         }
             post {
