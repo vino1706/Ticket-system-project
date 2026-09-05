@@ -47,10 +47,7 @@ pipeline {
         stage('Docker Frontend build') {
             steps {
                 echo 'Verifying that application services are live...'
-                sh '''
-                cd frontend/
-                docker build -t frontendbookingapp:v1 . '
-                '''
+                sh 'cd frontend && docker build -t frontendbookingapp:v1 . '
             }
         }
         stage('Docker Login & Push:Backend') {
