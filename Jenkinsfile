@@ -31,12 +31,6 @@ pipeline {
                 junit '**/target/surefire-reports/*.xml'    
             }
         }
-            post {
-                always {
-                    // Automatically parses target/surefire-reports to render visual test UI inside Jenkins
-                    junit '**/target/surefire-reports/*.xml'
-                }
-            }
         stage('Frontend server test') {
             steps {
                 sh 'npm test'
