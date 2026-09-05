@@ -27,7 +27,7 @@ services:
     build: .
     container_name: bms-java-backend
     ports:
-      - "8080:8080"
+      - "8081:8080"
     environment:
       # Automatically overrides the src/main/resources/application.properties configs
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/BMS
