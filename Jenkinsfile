@@ -88,7 +88,7 @@ pipeline {
             steps {
                 echo 'Spinning up containers for Monitoring Stacks'
                 dir('monitoring') {
-                    sh 'cd frontend && docker compose up -d --build'
+                    sh 'cd ${WORKSPACE}/frontend && docker compose up -d --build'
                 }
             }
         }
