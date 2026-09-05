@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # 1. Database Tier (PostgreSQL)
+  db:
+    image: postgres:17-alpine
+    container_name: bms-postgres-db
+    environment:
+      POSTGRES_DB: BMS
+      POSTGRES_USER: sla
+      POSTGRES_PASSWORD: sla@123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      # Ensures the database engine is fully ready before other apps connect
+      test: ["CMD-SHELL", "pg_isready -U sla -d BMS"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bms-network
+
+  # 2. Backend Tier (Java 21 Spring Boot Application)
+  backend:
+    build: .
+    container_name: bms-java-backend
+    ports:
+      - "8080:8080"
+    environment:
+      # Automatically overrides the src/main/resources/application.properties configs
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/BMS
+      - SPRING_DATASOURCE_USERNAME=sla
+      - SPRING_DATASOURCE_PASSWORD=sla@123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - bms-network
+
+  # 3. Frontend Tier (React + Vite served via Nginx)
+  frontend:
+    build: ./frontend
+    container_name: bms-react-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - bms-network
+
+# Shared networks and persistent volumes
+networks:
+  bms-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+    driver: local
